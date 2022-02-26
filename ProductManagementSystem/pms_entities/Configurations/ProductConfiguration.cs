@@ -14,8 +14,8 @@ namespace ProductManagementSystem.Entities.Configurations
         public void Configure(EntityTypeBuilder<Product> builder)
         {
             builder.HasKey(p => p.Id);
-            builder.HasMany(p => p.Categories).WithMany(c => c.Products);
-            builder.HasOne(p => p.Brand).WithMany().IsRequired();
+            //builder.HasMany(p => p.Categories).WithMany(c => c.Products);
+            //builder.HasOne(p => p.Brand).WithMany().IsRequired();
             builder.HasIndex(p => p.Name).IsUnique();
             builder.Property(p => p.Description).IsRequired();
             builder.HasIndex(p => p.EanNumber).IsUnique();

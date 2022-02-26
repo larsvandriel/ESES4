@@ -12,8 +12,8 @@ namespace ProductManagementSystem.Entities.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string EanNumber { get; set; }
-        public Brand Brand { get; set; }
-        public List<Category> Categories { get; set; }
+        //public Brand Brand { get; set; }
+        //public List<Category> Categories { get; set; }
         public decimal Price { get; set; }
         public string ImageLocation { get; set; }
         public DateTime TimeCreated { get; set; }
