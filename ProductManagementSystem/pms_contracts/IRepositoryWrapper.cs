@@ -8,11 +8,7 @@ namespace ProductManagementSystem.Contracts
 {
     public interface IRepositoryWrapper
     {
-        IBrandRepository Brand { get; }
-        ICategoryRepository Category { get; }
         IProductRepository Product { get; }
-        ISupplierRepository Supplier { get; }
-        ISupplierOfferRepository SupplierOffer { get; }
         void Save();
     }
 }

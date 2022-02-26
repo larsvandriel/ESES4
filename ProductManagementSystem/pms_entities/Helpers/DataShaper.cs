@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProductManagementSystem.Entities.Helpers
 {
-    public class DataShaper<T>: IDataShaper<T>
+    public class DataShaper<T> : IDataShaper<T>
     {
         public PropertyInfo[] Properties { get; set; }
 
@@ -74,31 +74,9 @@ namespace ProductManagementSystem.Entities.Helpers
 
         private ShapedEntity FetchDataForEntity(T entity, IEnumerable<PropertyInfo> requiredProperties)
         {
-            ShapedEntity shapedObject;
-            if(entity is SupplierOffer)
-            {
-                var shapedSupplierOfferEntity = new ShapedSupplierOfferEntity();
-
-                var objectProperty = entity.GetType().GetProperty("SupplierId");
-                shapedSupplierOfferEntity.SupplierId = (Guid)objectProperty.GetValue(entity);
-
-                objectProperty = entity.GetType().GetProperty("ProductId");
-                shapedSupplierOfferEntity.ProductId = (Guid)objectProperty.GetValue(entity);
-
-                objectProperty = entity.GetType().GetProperty("Amount");
-                shapedSupplierOfferEntity.Amount = (int)objectProperty.GetValue(entity);
-
-                shapedObject = shapedSupplierOfferEntity;
-            }
-            else
-            {
-                var normalShapedEntity = new NormalShapedEntity();
-
-                var objectProperty = entity.GetType().GetProperty("Id");
-                normalShapedEntity.Id = (Guid) objectProperty.GetValue(entity);
-
-                shapedObject = normalShapedEntity;
-            }
+            ShapedEntity shapedObject = new ShapedEntity();
+            var objectProperty = entity.GetType().GetProperty("Id");
+            shapedObject.Id = (Guid)objectProperty.GetValue(entity);
 
             foreach (var property in requiredProperties)
             {

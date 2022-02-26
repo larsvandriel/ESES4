@@ -16,7 +16,7 @@ namespace ProductManagementSystem.Entities.Extensions
             dbProduct.Description = product.Description;
             dbProduct.Price = product.Price;
             dbProduct.ImageLocation = product.ImageLocation;
-            dbProduct.Brand = product.Brand;
+            //dbProduct.Brand = product.Brand;
             //dbProduct.Categories = product.Categories;
             dbProduct.TimeCreated = product.TimeCreated;
             dbProduct.Deleted = product.Deleted;
