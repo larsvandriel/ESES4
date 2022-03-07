@@ -1,0 +1,58 @@
+<h1>Product</h1>
+<button type="button" [routerLink]="['../']" class="btn btn-primary">Back</button>
+<div *ngIf="getContentLoaded()" class="container-fluid">
+  <table>
+    <tbody>
+    <tr>
+      <td>
+        Name
+      </td>
+      <td>
+        {{getProduct().name}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Description
+      </td>
+      <td>
+        {{getProduct().description}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        EAN
+      </td>
+      <td>
+        {{getProduct().eanNumber}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Price
+      </td>
+      <td>
+        {{getProduct().price}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Image Location
+      </td>
+      <td>
+        {{getProduct().imageLocation}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Time Created
+      </td>
+      <td>
+        {{getProduct().timeCreated}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <button type="button" [routerLink]="['edit']" class="btn btn-warning">Edit</button>
+  <button type="button" (click)="deleteCategory(getProduct().id)" class="btn btn-danger">Delete</button>
+</div>

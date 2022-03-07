@@ -1,0 +1,31 @@
+<h1>Create Product</h1>
+
+<form (ngSubmit)="createProduct()" #productForm="ngForm" >
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" name="name" required [(ngModel)]="product.name">
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea type="text" class="form-control" id="description" name="description" required [(ngModel)]="product.description"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="eanNumber">EAN</label>
+    <input type="text" class="form-control" id="eanNumber" name="eanNumber" required [(ngModel)]="product.eanNumber">
+  </div>
+
+  <div class="form-group">
+    <label for="price">Price</label>
+    <input type="text" class="form-control" id="price" name="price" required [(ngModel)]="product.price">
+  </div>
+
+  <div class="form-group">
+    <label for="imageLocation">ImageLocation</label>
+    <input type="text" class="form-control" id="imageLocation" name="imageLocation" [(ngModel)]="product.imageLocation">
+  </div>
+
+  <button type="submit" class="btn btn-success" [disabled]="!productForm.form.valid">Create Product</button>
+  <button type="cancel" class="btn btn-danger" [routerLink]="['../']">Cancel</button>
+</form>

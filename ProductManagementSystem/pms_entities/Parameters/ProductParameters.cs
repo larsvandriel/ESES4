@@ -13,10 +13,10 @@ namespace ProductManagementSystem.Entities.Parameters
             OrderBy = "name";
         }
 
-        public string CategoryName { get; set; }
-        public string BrandName { get; set; }
+        //public string CategoryName { get; set; }
+        //public string BrandName { get; set; }
         public decimal MinimalPrice { get; set; }
         public decimal MaximumPrice { get; set; }
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }
