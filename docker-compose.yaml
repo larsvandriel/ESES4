@@ -1,0 +1,47 @@
+version: "3.7"
+
+services:
+  pms_db:
+    container_name: PMS_Database
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    volumes:
+      - eses4_volume:/var/opt/mssql/product
+    environment:
+      SA_PASSWORD: "pw123_Example"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433"
+      - "1401:1433"
+    networks:
+      - eses4
+    restart: on-failure
+  
+  pms_microservice:
+    restart: on-failure
+    depends_on:
+      - pms_db
+    container_name: pms_microservice
+    build:
+      dockerfile: ProductManagementSystem\pms_api\Dockerfile
+    ports:
+      - "5001:80"
+    networks:
+      - eses4
+
+  frontend_eses4:
+    restart: on-failure
+    depends_on:
+      - pms_microservice
+    container_name: frontend_eses4
+    build:
+      context: frontend
+    ports:
+      - "4200:4200"
+    networks:
+      - eses4
+
+volumes:
+  eses4_volume:
+networks:
+  eses4:
+    external: true
