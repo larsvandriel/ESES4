@@ -77,7 +77,7 @@ namespace ProductManagementSystem.API.Controllers
 
         [HttpGet("{id}", Name = "ProductById")]
         [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
-        public IActionResult GetProductById(Guid id, [FromQuery] string fields)
+        public IActionResult GetProductById(Guid id, [FromQuery] string? fields)
         {
             try
             {

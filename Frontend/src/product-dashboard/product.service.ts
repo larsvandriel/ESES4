@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Product} from "./product.model";
 
@@ -13,8 +13,11 @@ export class ProductService {
 
   getProducts(): Observable<any> {
     const url = this.baseUrl + 'Product';
-    const httpOptions = {headers: new HttpHeaders({'Accept': 'application/json'})};
-    return this.httpClient.get(url, httpOptions);
+    const headers = new HttpHeaders({'Accept': 'application/json'});
+    // const params = new HttpParams().set('filter', filter).set('orderBy', orderBy).set('pageNumber', pageNumber).set('pageSize', pageSize)
+    const options = { headers, observe: 'response'}
+    // @ts-ignore
+    return this.httpClient.get(url, options);
   }
 
   getProduct(productId: string): Observable<any> {

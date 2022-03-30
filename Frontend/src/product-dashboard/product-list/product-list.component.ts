@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {Product} from "../product.model";
 import {ProductService} from "../product.service";
 import {Router} from "@angular/router";
+import {MatPaginator} from "@angular/material/paginator";
+import {tap} from "rxjs";
+import {ProductDataSource} from "../product_data_source";
 
 @Component({
   selector: 'app-product-list',
@@ -10,24 +13,52 @@ import {Router} from "@angular/router";
 })
 export class ProductListComponent implements OnInit {
 
+  // dataSource: ProductDataSource;
   displayedColumns = ["Name", "EAN", "Price", "Buttons"]
+
+  @ViewChild(MatPaginator) paginator: MatPaginator| undefined
+
+  amountOfProducts = 3
 
   private products: Array<Product> = []
   private contentLoaded = false;
   private routerLinkDisabled = false;
 
-  constructor(private productService: ProductService, private router: Router) { }
+  constructor(private productService: ProductService, private router: Router) {
+    // this.dataSource = new ProductDataSource(this.productService)
+  }
 
   ngOnInit(): void {
-    this.productService.getProducts().subscribe(products => {
+    /*this.dataSource = new ProductDataSource(this.productService)
+    this.dataSource.loadProducts()
+    console.log(this.dataSource.productSubject)*/
+
+    this.productService.getProducts().subscribe(resp => {
+      this.amountOfProducts = JSON.parse(resp.headers.get('x-pagination')).TotalCount;
       // @ts-ignore
-      products.forEach(product => {
+      resp.body.forEach(product => {
         this.products.push(
           new Product(product.Id, product.Name, product.Description, product.EanNumber, product.Price, product.ImageLocation, product.TimeCreated, product.Deleted, product.TimeDeleted));
       });
       this.contentLoaded = true;
     });
   }
+
+  // ngAfterViewInit() {
+  //   // @ts-ignore
+  //   this.paginator.page
+  //     .pipe(
+  //       tap(() => this.loadProductsPage())
+  //     )
+  //     .subscribe()
+  //   console.log(this.dataSource)
+  // }
+
+  loadProductsPage(): void {
+    // @ts-ignore
+    this.productService.getProducts('', 'Name', this.paginator.pageIndex, this.paginator.pageSize);
+  }
+
 
   getProducts(): Product[] {
     return this.products;

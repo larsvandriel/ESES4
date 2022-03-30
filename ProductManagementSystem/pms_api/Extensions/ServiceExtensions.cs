@@ -20,7 +20,7 @@ namespace ProductManagementSystem.API.Extensions
                 options.AddPolicy("CorsPolicy",
                     builder => builder.AllowAnyOrigin()
                     .AllowAnyMethod()
-                    .AllowAnyHeader());
+                    .AllowAnyHeader().WithExposedHeaders("x-pagination"));
             });
         }
 

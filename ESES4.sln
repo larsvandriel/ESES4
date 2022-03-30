@@ -5,15 +5,15 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ProductManagementSystem", "ProductManagementSystem", "{9240CEBC-A595-42FA-8403-E1A9963C2D08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pms_entities", "ProductManagementSystem\pms_entities\pms_entities.csproj", "{113A12BB-840E-46FD-8989-8D44F78FF74F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pms_entities", "ProductManagementSystem\pms_entities\pms_entities.csproj", "{113A12BB-840E-46FD-8989-8D44F78FF74F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pms_contracts", "ProductManagementSystem\pms_contracts\pms_contracts.csproj", "{F1BC362C-1BB0-4BD4-881D-8040A82A9C95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pms_contracts", "ProductManagementSystem\pms_contracts\pms_contracts.csproj", "{F1BC362C-1BB0-4BD4-881D-8040A82A9C95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pms_repository", "ProductManagementSystem\pms_repository\pms_repository.csproj", "{1C39D063-B739-481E-BF18-DB4FCE893DA4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pms_repository", "ProductManagementSystem\pms_repository\pms_repository.csproj", "{1C39D063-B739-481E-BF18-DB4FCE893DA4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingService", "LoggingService\LoggingService.csproj", "{20A770B4-5D9F-4B36-806C-4DB84A53E75C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggingService", "LoggingService\LoggingService.csproj", "{20A770B4-5D9F-4B36-806C-4DB84A53E75C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pms_api", "ProductManagementSystem\pms_api\pms_api.csproj", "{E721092F-95A6-400F-A645-AF349605B44A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "pms_api", "ProductManagementSystem\pms_api\pms_api.csproj", "{E721092F-95A6-400F-A645-AF349605B44A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
