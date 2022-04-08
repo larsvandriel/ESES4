@@ -23,6 +23,7 @@ services:
     container_name: pms_microservice
     build:
       dockerfile: ProductManagementSystem\pms_api\Dockerfile
+      context: .
     ports:
       - "5001:80"
     networks:
