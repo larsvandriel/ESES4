@@ -1,0 +1,78 @@
+﻿using LoggingService;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.EntityFrameworkCore;
+using ProductManagementSystem.API.Filters;
+using ProductManagementSystem.Contracts;
+using ProductManagementSystem.Entities;
+using ProductManagementSystem.Entities.Helpers;
+using ProductManagementSystem.Entities.Models;
+using ProductManagementSystem.Repository;
+
+namespace ProductManagementSystem.API.Extensions
+{
+    public static class ServiceExtensions
+    {
+        public static void ConfigureCors(this IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader().WithExposedHeaders("x-pagination"));
+            });
+        }
+
+        public static void ConfigureIISIntegration(this IServiceCollection services)
+        {
+            services.Configure<IISOptions>(options =>
+            {
+
+            });
+        }
+
+        public static void ConfigureLoggerService(this IServiceCollection services)
+        {
+            services.AddSingleton<ILoggerManager, LoggerManager>();
+        }
+
+        public static void ConfigureMsSqlContext(this IServiceCollection services, IConfiguration config)
+        {
+            var connectionString = config["mssqlconnection:connectionString"];
+            services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(connectionString));
+        }
+
+        public static void ConfigureRepositoryWrapper(this IServiceCollection services)
+        {
+            services.AddScoped<ISortHelper<Product>, SortHelper<Product>>();
+            services.AddScoped<IDataShaper<Product>, DataShaper<Product>>();
+
+            services.AddScoped<IRepositoryWrapper, RepositoryWrapper>();
+        }
+
+        public static void RegisterFilters(this IServiceCollection services)
+        {
+            services.AddScoped<ValidateMediaTypeAttribute>();
+        }
+
+        public static void AddCustomMediaTypes(this IServiceCollection services)
+        {
+            services.Configure<MvcOptions>(config =>
+            {
+                var newtonsoftJsonOutputFormatter = config.OutputFormatters.OfType<NewtonsoftJsonOutputFormatter>()?.FirstOrDefault();
+
+                if (newtonsoftJsonOutputFormatter != null)
+                {
+                    newtonsoftJsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.eses2.hateoas+json");
+                }
+                var xmlOutputFormatter = config.OutputFormatters.OfType<XmlDataContractSerializerOutputFormatter>()?.FirstOrDefault();
+
+                if (xmlOutputFormatter != null)
+                {
+                    xmlOutputFormatter.SupportedMediaTypes.Add("application/vnd.eses2.hateoas+xml");
+                }
+            });
+        }
+    }
+}
